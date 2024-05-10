@@ -1,0 +1,24 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model imagem {
+  idimagem          Int      @id @unique(map: "idimagem_UNIQUE") @default(autoincrement())
+  projeto_idprojeto Int      @db.UnsignedInt
+  url               String   @db.VarChar(45)
+  Data              DateTime @db.Date
+  versao            Int?
+
+  @@index([projeto_idprojeto], map: "fk_imagem_projeto_idx")
+}
+
+model projeto {
+  idprojeto Int      @id @default(autoincrement()) @db.UnsignedInt
+  Nome      String   @db.VarChar(45)
+  Data      DateTime @db.Date
+}

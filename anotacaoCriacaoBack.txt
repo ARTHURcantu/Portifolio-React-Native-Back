@@ -1,0 +1,8 @@
+para começar o projeto faça:
+
+npm i express-generator --global 
+npx express --view=ejs backend // para criar fora da pasta basta tira o nome "backend"
+npm i prisma -D
+npm i dotenv
+npm i cors
+npx prisma init --datasource-provider mysq
