@@ -10,7 +10,9 @@ app.use(logger)
 app.use(cors({
     origin:['http://localhost:3000', 'http://localhost:8081', 'http://meusite.com'],
     methods: ['GET', 'PUT', 'POST', 'DELETE'],
-    a
+    allowedHeaders: ['Content-type']
 }))
+app.use('/Imagem', ImagesRouter)
+app.use('/Projetos', ProjetosRouter)
 
 
