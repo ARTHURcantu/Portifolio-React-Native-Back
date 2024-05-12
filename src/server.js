@@ -1,8 +1,10 @@
 import express from "express";
-import {PORT, HOST} from '../.en'
 import cors from 'cors'
 
-import logger from "./middleware/logger";
+import logger from './middleware/logger.js'
+import {HOST, PORT} from './config.js'
+import imagemRouter from "./routers/imagemRouter.js";
+import projetosRouter from './routers/projetoRouter.js'
 
 const app = express()
 
@@ -12,7 +14,9 @@ app.use(cors({
     methods: ['GET', 'PUT', 'POST', 'DELETE'],
     allowedHeaders: ['Content-type']
 }))
-app.use('/Imagem', ImagesRouter)
-app.use('/Projetos', ProjetosRouter)
+app.use('/Imagem', imagemRouter)
+// app.use('/Projetos', projetosRouter)
 
-
+app.listen(PORT, () => {
+    console.log(`Server running on ${HOST}:${PORT}`)
+  })
