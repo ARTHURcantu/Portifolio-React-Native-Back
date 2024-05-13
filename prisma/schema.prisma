@@ -9,7 +9,7 @@ datasource db {
 
 model imagem {
   idimagem          Int      @id @unique(map: "idimagem_UNIQUE") @default(autoincrement())
-  projeto_idprojeto Int      @db.UnsignedInt
+  projeto_idprojeto Int?      @db.UnsignedInt
   url               String   @db.VarChar(45)
   Data              DateTime @db.Date
   versao            Int?
