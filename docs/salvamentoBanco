@@ -1,3 +1,4 @@
+
 -- MySQL Workbench Forward Engineering
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
@@ -5,47 +6,52 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema Portifolio
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Schema portifolioNome
 -- -----------------------------------------------------
 
--- -----------------------------------------------------
--- Schema Portifolio
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `Portifolio` DEFAULT CHARACTER SET utf8 ;
 -- -----------------------------------------------------
 -- Schema portifolio
 -- -----------------------------------------------------
-USE `Portifolio` ;
+CREATE SCHEMA IF NOT EXISTS `portifolio` DEFAULT CHARACTER SET utf8mb4 ;
+USE `portifolio` ;
 
 -- -----------------------------------------------------
--- Table `Portifolio`.`projeto`
+-- Table `portifolio`.`projeto`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Portifolio`.`projeto` (
-  `idprojeto` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `Nome` VARCHAR(45) NOT NULL,
+CREATE TABLE IF NOT EXISTS `portifolio`.`projeto` (
+  `idprojeto` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `Nome` VARCHAR(200) NOT NULL,
   `Data` DATE NOT NULL,
+  `imagem _capa` VARCHAR(2000) NOT NULL,
   PRIMARY KEY (`idprojeto`))
-ENGINE = InnoDB;
+ENGINE = InnoDB
+AUTO_INCREMENT = 4
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `Portifolio`.`imagem`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Portifolio`.`imagem` (
-  `idimagem` INT NOT NULL AUTO_INCREMENT,
-  `projeto_idprojeto` INT UNSIGNED NOT NULL,
-  `url` VARCHAR(45) NOT NULL,
+-- Table `portifolio`.`imagem`
+-- -----------------------------------------------------projetoprojetoprojeto
+CREATE TABLE IF NOT EXISTS `portifolio`.`imagem` (
+  `idimagem` INT(11) NOT NULL AUTO_INCREMENT,
+  `projeto_idprojeto` INT(10) UNSIGNED NULL DEFAULT NULL,
+  `url` VARCHAR(2000) NOT NULL,
   `Data` DATE NOT NULL,
-  `versao` INT NULL,
+  `versao` INT(11) NULL DEFAULT NULL,
   PRIMARY KEY (`idimagem`),
   UNIQUE INDEX `idimagem_UNIQUE` (`idimagem` ASC),
   INDEX `fk_imagem_projeto_idx` (`projeto_idprojeto` ASC),
   CONSTRAINT `fk_imagem_projeto`
     FOREIGN KEY (`projeto_idprojeto`)
-    REFERENCES `Portifolio`.`projeto` (`idprojeto`)
+    REFERENCES `portifolio`.`projeto` (`idprojeto`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+AUTO_INCREMENT = 10
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

@@ -1,8 +1,8 @@
-import imageModel from '../../model/imageModel.js'
+import projetoModel from "../../model/projetoModel.js"
 const getById = async(req, res) => {
     try{
-        const id = id.params.id
-        const user = await imageModel.getById(+id)
+        const id = req.params.id
+        const user = await projetoModel.getById(+id)
         res.json({
             success: `Usuário ${id} encontrado com sucesso!`,
             user
@@ -16,8 +16,3 @@ const getById = async(req, res) => {
 }
 
 export default getById
-
-
-
-
-

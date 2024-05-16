@@ -9,8 +9,8 @@ datasource db {
 
 model imagem {
   idimagem          Int      @id @unique(map: "idimagem_UNIQUE") @default(autoincrement())
-  projeto_idprojeto Int?      @db.UnsignedInt
-  url               String   @db.VarChar(45)
+  projeto_idprojeto Int?     @db.UnsignedInt
+  url               String   @db.VarChar(2000)
   Data              DateTime @db.Date
   versao            Int?
 
@@ -18,7 +18,8 @@ model imagem {
 }
 
 model projeto {
-  idprojeto Int      @id @default(autoincrement()) @db.UnsignedInt
-  Nome      String   @db.VarChar(45)
-  Data      DateTime @db.Date
+  idprojeto    Int      @id @default(autoincrement()) @db.UnsignedInt
+  Nome         String   @db.VarChar(200)
+  Data         DateTime @db.Date
+  imagem__capa String   @map("imagem _capa") @db.VarChar(2000)
 }

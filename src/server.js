@@ -14,8 +14,8 @@ app.use(cors({
     methods: ['GET', 'PUT', 'POST', 'DELETE'],
     allowedHeaders: ['Content-type']
 }))
-app.use('/Imagem', imagemRouter)
-// app.use('/Projetos', projetosRouter)
+app.use('/imagem', imagemRouter)
+app.use('/projetos', projetosRouter)
 
 app.listen(PORT, () => {
     console.log(`Server running on ${HOST}:${PORT}`)

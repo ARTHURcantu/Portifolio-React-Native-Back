@@ -26,7 +26,7 @@ const validateImageToCreate = (imagem) => {
 }
 
 const validateImageToUpdate = (imagem) => {
-  const partialImageScrema = imagemScema.partial({idimagem: true, url:true})
+  const partialImageScrema = imageScrema.partial({idimagem: true, url:true})
   return partialImageScrema.safeParce(imagem)
 }
 
