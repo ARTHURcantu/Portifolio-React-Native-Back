@@ -10,6 +10,11 @@ const create = async () => {
                 fields: zodError
             })
         }
+        const newUser = await userModel.create(result.data);
+        return res.json({
+            success: `Usuário ${newUser.id} criado com sucesso!`,
+            user: newUser
+        });
     } catch (error) {
         return res.status(500).json({
             error: 'Opsss erro no servidor, tente novamente!'
