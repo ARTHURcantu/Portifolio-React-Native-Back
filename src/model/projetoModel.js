@@ -13,16 +13,22 @@ const projetoScrema = z.object({
         invalid_type_error: "O projeto deve ser uma string.",
       })
       .min(3, {message: 'o nome deve ter no mnimo 3 letras.'})
-      .max(200, {message: 'O avatar deve ter no máximo 200 caracteres.'})
+      .max(200, {message: 'O avatar deve ter no máximo 200 caracteres.'}),
+    imagem__capa: z.string({
+        required_error: "A imagem de capa é obrigatoria",
+        invalid_type_error: "A imagem deve ser uma string",
+      })
+      .max(2000, {message: 'O link deve ter no maximo 2000 caracteres'})
+    
 })
 
 const validateProjetoToCreate = (projeto) => {
-  const partialProjetoScrema = projetoScrema.partial({idprojeto:true, Nome:true})
+  const partialProjetoScrema = projetoScrema.partial({idprojeto:true, Nome:true, imagem__capa: true})
   return partialProjetoScrema.safeParce(projeto)
 }
 
 const validateProjetoToUpdate = (projeto) => {
-  const partialProjetoScrema = projetoScrema.partial({idprojeto: true, url:true})
+  const partialProjetoScrema = projetoScrema.partial({idprojeto: true, url:true, imagem__capa: true})
   return partialProjetoScrema.safeParce(projeto)
 }
 
@@ -30,7 +36,8 @@ const getAll = async () => {
   return await prisma.projeto.findMany({
       select: {
           idprojeto: true,
-          Nome: true
+          Nome: true,
+          imagem__capa: true
       }
   })
 }
@@ -38,11 +45,12 @@ const getAll = async () => {
 const getById = async (id) => {
   return await prisma.projeto.findUnique({
       where: {
-        idprojeto
+        idprojeto: id
       },
       select: {
         idprojeto: true,
-        Nome: true
+        Nome: true,
+        imagem__capa: true
       }
   })
 }
@@ -52,19 +60,21 @@ const create = async (projeto) => {
       data: projeto,
       select: {
         idprojeto: true,
-        Nome: true
+        Nome: true,
+        imagem__capa: true
       }
   })
 }
 
-const remove = async (idprojeto) => {
+const remove = async (id) => {
   return await prisma.projeto.delete({
       where: {
-          idprojeto
+          idprojeto: id
       },
       select: {
         idprojeto: true,
-        Nome: true
+        Nome: true,
+        imagem__capa:true
       }
   })
 }

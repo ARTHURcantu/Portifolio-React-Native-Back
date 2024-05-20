@@ -2,10 +2,10 @@ import projetoModel from "../../model/projetoModel.js"
 const getById = async(req, res) => {
     try{
         const id = req.params.id
-        const user = await projetoModel.getById(+id)
+        const projeto = await projetoModel.getById(+id)
         res.json({
-            success: `Usuário ${id} encontrado com sucesso!`,
-            user
+            success: `projeto ${id} encontrado com sucesso!`,
+            projeto
         })
     }catch(e){
         console.log(e)

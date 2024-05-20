@@ -43,7 +43,7 @@ const getAll = async () => {
 const getById = async (id) => {
   return await prisma.imagem.findUnique({
       where: {
-          idimagem
+          idimagem: id
       },
       select: {
         idimagem: true,
@@ -67,7 +67,7 @@ const create = async (imagem) => {
 const remove = async (idimagem) => {
   return await prisma.imagem.delete({
       where: {
-          idimagem
+          idimagem: id
       },
       select: {
         idimagem: true,
