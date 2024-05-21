@@ -3,7 +3,7 @@ import { z } from "zod";
 
 const prisma = new PrismaClient()
 
-const imageScrema = z.object({
+const imageSchema = z.object({
     idimagem: z.number({
         required_error: "ID é obrigatório.",
         invalid_type_error: "O ID deve ser um número inteiro.",
@@ -21,13 +21,13 @@ const imageScrema = z.object({
 })
 
 const validateImageToCreate = (imagem) => {
-  const partialImageScrema = imageScrema.partial({idimagem:true, url:true, projeto_idprojeto: true})
-  return partialImageScrema.safeParce(imagem)
+  const partialimageSchema = imageSchema.partial({idimagem:false, url:true, projeto_idprojeto: true})
+  return partialimageSchema.safeParse(imagem)
 }
 
 const validateImageToUpdate = (imagem) => {
-  const partialImageScrema = imageScrema.partial({idimagem: true, url:true})
-  return partialImageScrema.safeParce(imagem)
+  const partialimageSchema = imageSchema.partial({idimagem: true, url:true})
+  return partialimageSchema.safeParse(imagem)
 }
 
 const getAll = async () => {
@@ -57,7 +57,7 @@ const create = async (imagem) => {
   return await prisma.imagem.create({
       data: imagem,
       select: {
-        idimagem: true,
+        idimagem: false,
         url: true,
         projeto_idprojeto: true
       }
