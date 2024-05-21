@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import { json } from "express";
 import { z } from "zod";
 
 const prisma = new PrismaClient()
@@ -37,12 +38,14 @@ const getAll = async () => {
       select: {
           idprojeto: true,
           Nome: true,
-          imagem__capa: true
+          'imagem__capa': true,
+          data:false
       }
   })
 }
 
 const getById = async (id) => {
+  try{
   return await prisma.projeto.findUnique({
       where: {
         idprojeto: id
@@ -50,9 +53,13 @@ const getById = async (id) => {
       select: {
         idprojeto: true,
         Nome: true,
-        imagem__capa: true
+        imagem__capa: true,
+        Data: false
       }
   })
+}catch(e){
+  console.log(e)
+}
 }
 
 const create = async (projeto) => {
