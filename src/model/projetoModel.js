@@ -1,5 +1,4 @@
 import { PrismaClient } from "@prisma/client";
-import { json } from "express";
 import { z } from "zod";
 
 const prisma = new PrismaClient()
@@ -25,12 +24,12 @@ const projetoScrema = z.object({
 
 const validateProjetoToCreate = (projeto) => {
   const partialProjetoScrema = projetoScrema.partial({idprojeto:true, Nome:true, imagem__capa: true})
-  return partialProjetoScrema.safeParce(projeto)
+  return partialProjetoScrema.safeParse(projeto)
 }
 
 const validateProjetoToUpdate = (projeto) => {
   const partialProjetoScrema = projetoScrema.partial({idprojeto: true, url:true, imagem__capa: true})
-  return partialProjetoScrema.safeParce(projeto)
+  return partialProjetoScrema.safeParse(projeto)
 }
 
 const getAll = async () => {
@@ -38,7 +37,7 @@ const getAll = async () => {
       select: {
           idprojeto: true,
           Nome: true,
-          'imagem__capa': true,
+          imagem__capa: true,
           data:false
       }
   })
@@ -62,11 +61,11 @@ const getById = async (id) => {
 }
 }
 
-const create = async (projeto) => {
+const create = async (project) => {
   return await prisma.projeto.create({
-      data: projeto,
+      data: project,
       select: {
-        idprojeto: true,
+        idprojeto: false,
         Nome: true,
         imagem__capa: true
       }

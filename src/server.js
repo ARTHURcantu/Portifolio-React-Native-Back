@@ -14,6 +14,7 @@ app.use(cors({
     methods: ['GET', 'PUT', 'POST', 'DELETE'],
     allowedHeaders: ['Content-type']
 }))
+app.use(express.json());
 app.use('/imagem', imagemRouter)
 app.use('/projetos', projetosRouter)
 
