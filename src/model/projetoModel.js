@@ -23,12 +23,12 @@ const projetoScrema = z.object({
 })
 
 const validateProjetoToCreate = (projeto) => {
-  const partialProjetoScrema = projetoScrema.partial({idprojeto:true, Nome:true, imagem__capa: true})
+  const partialProjetoScrema = projetoScrema.partial({idprojeto:true})
   return partialProjetoScrema.safeParse(projeto)
 }
 
 const validateProjetoToUpdate = (projeto) => {
-  const partialProjetoScrema = projetoScrema.partial({idprojeto: true, url:true, imagem__capa: true})
+  const partialProjetoScrema = projetoScrema.partial({idprojeto: true})
   return partialProjetoScrema.safeParse(projeto)
 }
 
@@ -37,8 +37,7 @@ const getAll = async () => {
       select: {
           idprojeto: true,
           Nome: true,
-          imagem__capa: true,
-          data:false
+          imagem__capa: true
       }
   })
 }
@@ -52,8 +51,7 @@ const getById = async (id) => {
       select: {
         idprojeto: true,
         Nome: true,
-        imagem__capa: true,
-        Data: false
+        imagem__capa: true
       }
   })
 }catch(e){
@@ -63,12 +61,7 @@ const getById = async (id) => {
 
 const create = async (project) => {
   return await prisma.projeto.create({
-      data: project,
-      select: {
-        idprojeto: false,
-        Nome: true,
-        imagem__capa: true
-      }
+      data: project
   })
 }
 

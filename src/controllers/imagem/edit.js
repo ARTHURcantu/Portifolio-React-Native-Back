@@ -2,11 +2,11 @@ import { ZodError } from 'zod'
 
 import imageModel from '../../model/imageModel.js'
 
-const create = async(req, res) => {
+const edit = async(req, res) => {
     try{
         const imagem = req.body
         imagem.projeto_idprojeto = +imagem.projeto_idprojeto
-        const result = await imageModel.validateImageToCreate(imagem)
+        const result = await imageModel.validateImageToUpdate(imagem)
         if(!result.success){
             return res.status(404).json({
                 error: `dados de cadastro inválidos`,
@@ -14,10 +14,10 @@ const create = async(req, res) => {
             })
         }
 
-        const newimage = await imageModel.create(result.data);
+        const editimage = await imageModel.edit(result.data);
         return res.json({
-            success: `Usuário ${newimage.idimagem} criado com sucesso!`,
-            imagem: newimage
+            success: `Usuário ${editimage.idimagem} editado com sucesso!`,
+            imagem: editimage
         });
     }catch(e){
         console.log(e)
@@ -27,4 +27,4 @@ const create = async(req, res) => {
     }
 }
 
-export default create
+export default edit

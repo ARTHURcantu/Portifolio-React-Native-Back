@@ -3,9 +3,7 @@ import projetoModel from '../../model/projetoModel.js'
 const create = async(req, res) => {
     try {
         const projeto = req.body
-
-        const result = projetoModel.validateProjetoToCreate(projeto)
-        console.log(`num2 ${JSON.stringify(result)}`);
+        const result = await projetoModel.validateProjetoToCreate(projeto)
 
         if(!result.success){
             
@@ -14,11 +12,11 @@ const create = async(req, res) => {
                 fields: result.error
             })
         }
+
         const newUser = await projetoModel.create(result.data);
-        console.log("num5  "+ "passou por aq")
         return res.json({
             success: `Usuário ${newUser.id} criado com sucesso!`,
-            user: newUser
+            projeto: newUser
         })
     } catch (error) {
         return res.status(500).json({

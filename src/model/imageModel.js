@@ -21,12 +21,12 @@ const imageSchema = z.object({
 })
 
 const validateImageToCreate = (imagem) => {
-  const partialimageSchema = imageSchema.partial({idimagem:false, url:true, projeto_idprojeto: true})
+  const partialimageSchema = imageSchema.partial({idimagem:true})
   return partialimageSchema.safeParse(imagem)
 }
 
 const validateImageToUpdate = (imagem) => {
-  const partialimageSchema = imageSchema.partial({idimagem: true, url:true})
+  const partialimageSchema = imageSchema.partial({url: true, projeto_idprojeto: true})
   return partialimageSchema.safeParse(imagem)
 }
 
@@ -55,12 +55,7 @@ const getById = async (id) => {
 
 const create = async (imagem) => {
   return await prisma.imagem.create({
-      data: imagem,
-      select: {
-        idimagem: false,
-        url: true,
-        projeto_idprojeto: true
-      }
+      data: imagem
   })
 }
 

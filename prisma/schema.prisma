@@ -11,9 +11,7 @@ model imagem {
   idimagem          Int      @id @unique(map: "idimagem_UNIQUE") @default(autoincrement())
   projeto_idprojeto Int?     @db.UnsignedInt
   url               String   @db.VarChar(2000)
-  Data              DateTime @db.Date
   versao            Int?
-  projeto           projeto? @relation(fields: [projeto_idprojeto], references: [idprojeto], onDelete: NoAction, onUpdate: NoAction, map: "fk_imagem_projeto")
 
   @@index([projeto_idprojeto], map: "fk_imagem_projeto_idx")
 }
@@ -21,7 +19,5 @@ model imagem {
 model projeto {
   idprojeto    Int      @id @default(autoincrement()) @db.UnsignedInt
   Nome         String   @db.VarChar(200)
-  Data         DateTime @db.Date
   imagem__capa String   @map("imagem _capa") @db.VarChar(2000)
-  imagem       imagem[]
 }
