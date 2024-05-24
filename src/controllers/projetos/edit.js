@@ -7,16 +7,13 @@ const edit = async(req, res) => {
         const projetoedit = req.body
         const projeto = {idprojeto, ...projetoedit}
         const result = await ProjetoModel.validateProjetoToUpdate(projeto)
-        console.log(projeto)
         if(!result.success){
             return res.status(404).json({
                 error: `dados de cadastro inválidos`,
                 fields: ZodError
             })
         }
-        console.log("te aq");
         const editProjeto = await ProjetoModel.edit(result.data);
-        console.log("to here");
         return res.json({
             success: `Usuário ${editProjeto.idprojeto} editado com sucesso!`,
             projeto: editProjeto

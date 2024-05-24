@@ -69,11 +69,6 @@ const remove = async (id) => {
   return await prisma.projeto.delete({
       where: {
           idprojeto: id
-      },
-      select: {
-        idprojeto: true,
-        Nome: true,
-        imagem__capa:true
       }
   })
 }

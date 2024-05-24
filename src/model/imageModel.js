@@ -55,20 +55,25 @@ const getById = async (id) => {
 
 const create = async (imagem) => {
   return await prisma.imagem.create({
+    where:{
       data: imagem
+    }
   })
 }
 
 const remove = async (idimagem) => {
   return await prisma.imagem.delete({
       where: {
-          idimagem: id
+          idimagem: idimagem
       },
-      select: {
-        idimagem: true,
-        url: true,
-        projeto_idprojeto: true
-      }
+      
+  })
+}
+const removeProjeto = async(idprojeto) =>{
+  return await prisma.imagem.deleteMany({
+    where:{
+      projeto_idprojeto: idprojeto
+    }
   })
 }
 
@@ -86,4 +91,4 @@ const edit = async (imagem) => {
   })
 }
 
-export default { getAll, getById, create, remove, edit, validateImageToCreate, validateImageToUpdate}
+export default { getAll, getById, create, remove, removeProjeto, edit, validateImageToCreate, validateImageToUpdate}
