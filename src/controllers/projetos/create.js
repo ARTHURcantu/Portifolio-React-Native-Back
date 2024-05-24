@@ -15,7 +15,7 @@ const create = async(req, res) => {
 
         const newUser = await projetoModel.create(result.data);
         return res.json({
-            success: `Usuário ${newUser.id} criado com sucesso!`,
+            success: `Usuário ${newUser.idprojeto} criado com sucesso!`,
             projeto: newUser
         })
     } catch (error) {

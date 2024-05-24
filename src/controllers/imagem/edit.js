@@ -4,9 +4,12 @@ import imageModel from '../../model/imageModel.js'
 
 const edit = async(req, res) => {
     try{
-        const imagem = req.body
-        imagem.projeto_idprojeto = +imagem.projeto_idprojeto
+        const idimagem = +req.params.id
+        const imagemedit = req.body
+        imagemedit.projeto_idprojeto = +imagemedit.projeto_idprojeto
+        const imagem = {idimagem, ...imagemedit}
         const result = await imageModel.validateImageToUpdate(imagem)
+        
         if(!result.success){
             return res.status(404).json({
                 error: `dados de cadastro inválidos`,
@@ -15,6 +18,7 @@ const edit = async(req, res) => {
         }
 
         const editimage = await imageModel.edit(result.data);
+
         return res.json({
             success: `Usuário ${editimage.idimagem} editado com sucesso!`,
             imagem: editimage

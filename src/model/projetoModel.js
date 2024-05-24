@@ -3,7 +3,7 @@ import { z } from "zod";
 
 const prisma = new PrismaClient()
 
-const projetoScrema = z.object({
+const projetoSchema = z.object({
     idprojeto: z.number({
         required_error: "ID é obrigatório.",
         invalid_type_error: "O ID deve ser um número inteiro.",
@@ -23,13 +23,13 @@ const projetoScrema = z.object({
 })
 
 const validateProjetoToCreate = (projeto) => {
-  const partialProjetoScrema = projetoScrema.partial({idprojeto:true})
-  return partialProjetoScrema.safeParse(projeto)
+  const partialProjetoSchema = projetoSchema.partial({idprojeto:true})
+  return partialProjetoSchema.safeParse(projeto)
 }
 
 const validateProjetoToUpdate = (projeto) => {
-  const partialProjetoScrema = projetoScrema.partial({idprojeto: true})
-  return partialProjetoScrema.safeParse(projeto)
+  const partialProjetoSchema = projetoSchema.partial({Nome: true, imagem__capa: true });
+  return partialProjetoSchema.safeParse(projeto);
 }
 
 const getAll = async () => {
