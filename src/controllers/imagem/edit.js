@@ -4,10 +4,12 @@ import imageModel from '../../model/imageModel.js'
 
 const edit = async(req, res) => {
     try{
-        const idimagem = +req.params.id
+        // const idimagem = +req.params.id
         const imagemedit = req.body
         imagemedit.projeto_idprojeto = +imagemedit.projeto_idprojeto
-        const imagem = {idimagem, ...imagemedit}
+        // const imagem = {idimagem, ...imagemedit}
+        const imagem = imagemedit 
+        console.log(imagem);
         const result = await imageModel.validateImageToUpdate(imagem)
         
         if(!result.success){

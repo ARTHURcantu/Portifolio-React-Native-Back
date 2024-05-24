@@ -13,7 +13,7 @@ const create = async(req, res) => {
                 fields: ZodError
             })
         }
-
+        console.log("teste de result", result);
         const newimage = await imageModel.create(result.data);
         return res.json({
             success: `Usuário ${newimage.idimagem} criado com sucesso!`,

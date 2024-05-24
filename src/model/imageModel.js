@@ -55,9 +55,7 @@ const getById = async (id) => {
 
 const create = async (imagem) => {
   return await prisma.imagem.create({
-    where:{
-      data: imagem
-    }
+    data: imagem
   })
 }
 
